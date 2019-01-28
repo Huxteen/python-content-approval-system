@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% load static %}
+
+
+<div class="container signup_container">
+    <div class="row">
+        <div class="col-md-6 card center-block signup_card">
+            <div class="col-md-12 pad-md-0 text-center signup_title">
+                <h2>Create an Account.</h2>
+            </div>
+
+
+            <!-- Django attribute to catch error or successful message dynamically -->
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert" {% endif %}>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    {% if message.tags == 'error' %}
+                    <strong>Whoops! &nbsp; </strong> {{ message }}.
+                    {% else %}
+                    <strong>Congratulations! &nbsp; </strong> {{ message }}.
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            
+            <!-- collect users signup data for processing -->
+            <form method="POST" action="{% url 'signup' %}">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control" id="exampleInputFirstName" name="first_name" placeholder="First Name..." required="required">                 
+                    </div>
+
+                    <div class="form-group col-md-6 ">                        
+                        <input type="text" class="form-control" id="exampleInputLastName" name="last_name" placeholder="Last Name..." required="required">              
+                    </div>
+                </div>
+        
+                <div class="form-group col-md-12 pad-md-0">
+                    <input type="text" class="form-control" id="exampleInputUsername" name="username" placeholder="Username..." required="required">                 
+                </div>
+
+                <div class="form-group col-md-12 pad-md-0">
+                    <input type="email" class="form-control" id="exampleInputEmail" name="email" placeholder="Enter email..." required="required">                 
+                </div>
+
+                <div class="form-group col-md-12 pad-md-0">
+                    <input type="password" class="form-control" id="exampleInputPassword" name="password" placeholder="Password..." required="required">                 
+                </div>
+
+                <div class="form-group col-md-12 pad-md-0">
+                    <input type="password" class="form-control" id="exampleInputConfirmPassword" name="cpassword" placeholder="Confirm Password..." required="required">                 
+                </div>
+
+                <button type="submit" class="btn btn-primary col-md-4 center-block signup_button">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}

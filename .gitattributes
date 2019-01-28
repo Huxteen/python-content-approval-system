@@ -1,0 +1,5 @@
+# This ignores my stylesheet and html files
+static/* linguist-vendored
+content_approval_system/static/* linguist-vendored
+content_approval_system/templates/* linguist-vendored
+accounts/templates/* linguist-vendored
